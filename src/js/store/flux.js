@@ -9,6 +9,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			createAgenta: async () => {
+				const store = getStore();
+
+				try {
+					const response = await fetch (
+						store.apiUrl,
+						{
+							method: "POST",
+							body: JSON.stringify(
+								
+							),
+							headers: {
+								"Content-Type": "application/json",
+							}
+						}
+						
+					);
+					if (response.ok) {
+						const data = await response.json();
+						
+					}
+					
+				} catch (error) {
+					console.log("Entro en el catch del createAgenta");
+					console.log(error);
+				}
+			},
 			getContactList: async () => {
 				
 
@@ -24,7 +51,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({contacts: data.contacts});
 						
 				} catch (error) {
-					console.log("Entro en el catch ");
+					console.log("Entro en el catch de getContactList");
 				}
 			},
 			
@@ -62,8 +89,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const actions = getActions();
 				
-				console.log(store.apiUrl + "/contacts" + `/${id}`);
-				console.log(contact);
+				
+				
 				try {
 					const response = await fetch(
 						store.apiUrl + "/contacts" + `/${id}`,
@@ -94,8 +121,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						{
 							method: "DELETE"
 						});
-						console.log ("despues del responce fetch")
-						console.log(response);
+
 					if (!response.ok) {
 						alert ("No se puede borrar")
 					}else{
